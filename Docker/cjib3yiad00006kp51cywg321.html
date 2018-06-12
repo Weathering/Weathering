@@ -53,7 +53,7 @@
 
 <meta name="keywords" content="">
 
-<meta name="description " content="">
+<meta name="description " content="Docker 搭建kafka">
 </head>
 <body>
 <div id="nav">
@@ -185,11 +185,12 @@
             </div>
             <h2 class="post-title">Docker 搭建Kafka</h2>
             <div class="post-meta">
-                本文总共0个字 | 您是第<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
+                本文总共918个字 | 您是第<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin"></i></span>位看到它们的小伙伴
             </div>
         </div>
         <div class="post-content markdown-body">
-            
+            <p>最近在公司闲着蛋疼，而我也是闲不住的人。没事就想自己搭建一个队列玩玩。话不多说我们开始。<br>首先我们先下载zookeeper的docker镜像这里我已经下载好了就不再演示了。<br><img src="/img/2018/15280166311066.jpg" alt=""><br>然后我们创建一个zookeeper容器命令<br>        docker run -d 12181:2181 -v F:/docker/zookeeper/zookeeper1/conf:/conf -v F:/docker/zookeeper/zookeeper1/data:/data<br>        -v F:/docker/zookeeper/zookeepe1/log:/datalog –name zookeeper1 -d zookeeper:latest<br>然后将映射文件地址和映射端口修改创建zookeeper2和zookeeper3<br><img src="/img/2018/15280166311066.jpg" alt=""><br>创建好了以后我们在F:/docker/zookeeper/zookeeper1/conf这个目录就会发现一个zoo.cfg的文件。不知道什么原因docker镜像的conf目录中<br>没有log4j.properties，我们可以在原有zookeeper目录下面拷贝一份过来。然后修改zoo.cfg<br>        clientPort=2181<br>        dataDir=/data<br>        dataLogDir=/datalog<br>        tickTime=2000<br>        initLimit=5<br>        syncLimit=2<br>        maxClientCnxns=60<br>        server.1=172.17.0.2:2888:3888<br>        server.2=172.17.0.3:2888:3888<br>        server.3=172.17.0.4:2888:3888<br>同理将zookeeper2和zookeeper3的zoo.cfg修改<br>然后我们依次启动zookeeper1,zookeeper2,zookeeper3(必须依次启动而且docker没有运行任何容器不然docker容器的IP会变这个问题待我询问大佬再解决)。<br>这里我们的zookeeper集群就搭建完了。</p>
+
         </div>
         <div class="post-tool">
             <a class="btn-thumbs-up" href="javascript:void(0);" data-cid="52" title="95">
@@ -241,7 +242,7 @@
             buildingTime: '06/06/2018',
             current: $('.post-tags').length > 0 ? 'post' : 'archive',
             snsQRCode: '/images/sns-qrcode.png',
-            donateImg: '/images/donate-qr.png',
+            donateImg: '',
         });
     });
 </script>

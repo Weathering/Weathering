@@ -51,6 +51,7 @@ var SimpleCore = {
             e.preventDefault();
             SimpleCore.goTop();
         });
+		$(".post-tool").hide();
         SimpleCore.changeReadModel();
         SimpleCore.setPageCurrent();
         SimpleCore.setBuildingTime();
